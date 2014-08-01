@@ -1,0 +1,24 @@
+{
+  "name": "classy-computed",
+  "version": "0.1.0",
+  "authors": [
+    "Dave Jeffery <dave@davejeffery.com>"
+  ],
+  "description": "Computed Properties plugin for Angular Classy",
+  "main": "classy-computed.js",
+  "keywords": [
+    "classy-plugin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-classy": "b4861d080054be84b2cfd0377499541fb1111f4e",
+    "angular": "1.3.0-beta.17"
+  }
+}

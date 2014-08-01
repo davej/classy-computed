@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>Computed Properties plugin for Angular Classy</title>
+</head>
+<body>
+
+	<script src="../bower_components/angular/angular.js"></script>
+	<script src="../bower_components/angular-classy/angular-classy.js"></script>
+	<script src="../classy-computed.js"></script>
+
+	<script src="computed.js"></script>
+	
+	<section ng-controller="ComputedController"
+		style="height: 300px"
+		ng-style="{background: fullName == 'Carlton Banks' && dancingCarltonCSSProp || 'transparent'}">
+		<!-- See if you can activate the easter egg! :-) -->
+		<h1>Computed property</h1>
+		<label>First name: <input ng-model="firstName"></label><br>
+		<label>Last name: <input ng-model="secondName"></label><br>
+		<label>Full name: {{ fullName }}</label><br>
+	</section>
+
+	<hr>
+
+	<section ng-controller="ComputedWithWatchController">
+		<h1>Computed property (with explicit watch for performance)</h1>
+		<label>First name: <input ng-model="firstName"></label><br>
+		<label>Last name: <input ng-model="secondName"></label><br>
+		<label>Full name: {{ fullName }}</label><br>
+
+	</section>
+
+	<hr>
+
+	<section ng-controller="ComputedSetController">
+		<h1>Computed set property</small></h1>
+		<label>First name: {{firstName}}</label><br>
+		<label>Last name: {{secondName}}</label><br>
+		<label>Full name:
+			<input ng-model="fullName">
+		</label>
+	</section>
+
+	<hr>
+
+	<section ng-controller="ComputedGetSetController">
+		<h1>Computed get &amp; set properties</small></h1>
+		<label>First name: <input ng-model="firstName"></label><br>
+		<label>Last name: <input ng-model="secondName"></label><br>
+		<label>Full name:
+			<input ng-model="fullName" ng-model-options="{ updateOn: 'blur' }" >
+			<small>Property changes on input blur</small>
+		</label>
+	</section>
+
+	<hr>
+
+	<section ng-controller="ComputedGetSetWithWatchController">
+		<h1>Computed get &amp; set properties (with explicit watch for performance)</small></h1>
+		<label>First name: <input ng-model="firstName"></label><br>
+		<label>Last name: <input ng-model="secondName"></label><br>
+		<label>Full name:
+			<input ng-model="fullName" ng-model-options="{ updateOn: 'blur' }" >
+			<small>Property changes on input blur</small>
+		</label>
+	</section>
+
+	<hr>
+
+</body>
+</html>
