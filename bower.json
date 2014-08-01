@@ -7,7 +7,9 @@
   "description": "Computed Properties plugin for Angular Classy",
   "main": "classy-computed.js",
   "keywords": [
-    "classy-plugin"
+    "classy-plugin",
+    "angularjs",
+    "angular"
   ],
   "license": "MIT",
   "ignore": [
