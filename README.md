@@ -1,4 +1,4 @@
-#### Computed Properties plugin for Angular Classy
+# Computed Properties plugin for Angular Classy
 
 This is plugin that makes it possible to do computed set & get properties with Angular Classy.
 
@@ -25,6 +25,8 @@ var app = angular.module('app', ['classy', 'classy-computed']);
 ```
 
 ## Usage Examples
+
+View [working examples here](http://davej.github.io/classy-computed/examples/).
 
 ### Simple computed property
 
