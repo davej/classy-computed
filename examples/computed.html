@@ -1,72 +1,86 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-	<title>Computed Properties plugin for Angular Classy</title>
+  <title>Computed Properties plugin for Angular Classy</title>
+  <style type="text/css">
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box; }
+    body {
+      font-size: 1em;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    section {
+      border-bottom: 2px #aaa dotted;
+      padding:3em;
+      padding-top: 2em;
+    }
+  </style>
 </head>
 <body>
 
-	<script src="../bower_components/angular/angular.js"></script>
-	<script src="../bower_components/angular-classy/angular-classy.js"></script>
-	<script src="../classy-computed.js"></script>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-classy/angular-classy.js"></script>
+  <script src="../classy-computed.js"></script>
 
-	<script src="computed.js"></script>
-	
-	<section ng-controller="ComputedController"
-		style="height: 300px"
-		ng-style="{background: fullName == 'Carlton Banks' && dancingCarltonCSSProp || 'transparent'}">
-		<!-- See if you can activate the easter egg! :-) -->
-		<h1>Computed property</h1>
-		<label>First name: <input ng-model="firstName"></label><br>
-		<label>Last name: <input ng-model="secondName"></label><br>
-		<label>Full name: {{ fullName }}</label><br>
-	</section>
+  <script src="computed.js"></script>
+  
+  <section ng-controller="ComputedController"
+    style="min-height: 300px"
+    ng-style="{background: fullName == 'Carlton Banks' && dancingCarltonCSSProp || 'transparent'}">
+    <!-- See if you can activate the easter egg! :-) -->
+    <h1>Computed property</h1>
+    <p>This is the most simple example. Take a look at this page's source and the <a href="computed.js">javascript source</a>, to see how it works.</p>
+    <p>There is a hidden easter egg, see if you can figure it out :-).</p>
+    <label>First name: <input ng-model="firstName"></label><br>
+    <label>Last name: <input ng-model="secondName"></label><br>
+    <label>Full name: {{ fullName }}</label><br>
+  </section>
 
-	<hr>
+  <section ng-controller="ComputedWithWatchController">
+    <h1>Computed property (with explicit watch for performance)</h1>
+    <p>Adding a watch field will give you better performance because it will only execute the computed expression when one of the watched properties has changed. In our trivial example below it will give you very little performance benefit, but for more complicated expressions it can give a significant speedup.</p>
+    <label>First name: <input ng-model="firstName"></label><br>
+    <label>Last name: <input ng-model="secondName"></label><br>
+    <label>Full name: {{ fullName }}</label><br>
 
-	<section ng-controller="ComputedWithWatchController">
-		<h1>Computed property (with explicit watch for performance)</h1>
-		<label>First name: <input ng-model="firstName"></label><br>
-		<label>Last name: <input ng-model="secondName"></label><br>
-		<label>Full name: {{ fullName }}</label><br>
+  </section>
 
-	</section>
+  <section ng-controller="ComputedSetController">
+    <h1>Computed set property</h1>
+    <p>You can also do computed setters</p>
+    <label>First name: {{firstName}}</label><br>
+    <label>Last name: {{secondName}}</label><br>
+    <label>Full name:
+      <input ng-model="fullName">
+    </label>
+  </section>
 
-	<hr>
+  <section ng-controller="ComputedGetSetController">
+    <h1>Computed get &amp; set properties</h1>
+    <p>You can even combine computed getters and setters</p>
+    <label>First name: <input ng-model="firstName"></label><br>
+    <label>Last name: <input ng-model="secondName"></label><br>
+    <label>Full name:
+      <input ng-model="fullName" ng-model-options="{ updateOn: 'blur' }" >
+      <small>Property changes on input blur</small>
+    </label>
+  </section>
 
-	<section ng-controller="ComputedSetController">
-		<h1>Computed set property</small></h1>
-		<label>First name: {{firstName}}</label><br>
-		<label>Last name: {{secondName}}</label><br>
-		<label>Full name:
-			<input ng-model="fullName">
-		</label>
-	</section>
-
-	<hr>
-
-	<section ng-controller="ComputedGetSetController">
-		<h1>Computed get &amp; set properties</small></h1>
-		<label>First name: <input ng-model="firstName"></label><br>
-		<label>Last name: <input ng-model="secondName"></label><br>
-		<label>Full name:
-			<input ng-model="fullName" ng-model-options="{ updateOn: 'blur' }" >
-			<small>Property changes on input blur</small>
-		</label>
-	</section>
-
-	<hr>
-
-	<section ng-controller="ComputedGetSetWithWatchController">
-		<h1>Computed get &amp; set properties (with explicit watch for performance)</small></h1>
-		<label>First name: <input ng-model="firstName"></label><br>
-		<label>Last name: <input ng-model="secondName"></label><br>
-		<label>Full name:
-			<input ng-model="fullName" ng-model-options="{ updateOn: 'blur' }" >
-			<small>Property changes on input blur</small>
-		</label>
-	</section>
-
-	<hr>
+  <section ng-controller="ComputedGetSetWithWatchController">
+    <h1>Computed get &amp; set properties (with explicit watch for performance)</h1>
+    <p>And of course, we can add a watch array for better <code>get</code> performance</p>
+    <label>First name: <input ng-model="firstName"></label><br>
+    <label>Last name: <input ng-model="secondName"></label><br>
+    <label>Full name:
+      <input ng-model="fullName" ng-model-options="{ updateOn: 'blur' }" >
+      <small>Property changes on input blur</small>
+    </label>
+  </section>
 
 </body>
 </html>
