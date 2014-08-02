@@ -1,6 +1,6 @@
 # Computed Properties plugin for Angular Classy
 
-This is plugin that makes it possible to do computed set & get properties with Angular Classy.
+This is plugin that makes it possible to do computed set & get properties with Angular Classy (as seen before in frameworks like ember). Tests coming soon.
 
 ## Install
 
