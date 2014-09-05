@@ -1,6 +1,8 @@
 angular.module('classy-computed', ['classy-core']).classy.plugin.controller
   name: 'computed'
 
+  localInject: ['$parse']
+  
   options:
     enabled: true
 
@@ -22,17 +24,22 @@ angular.module('classy-computed', ['classy-core']).classy.plugin.controller
         @registerAdvanced(prop, computeUsing, klass, deps)
 
   registerGet: (prop, getFn, klass, deps) ->
-    deps.$scope[prop] = angular.bind(klass, getFn)();
+    getter = @$parse prop
+    setter = getter.assign
+    setter deps.$scope, angular.bind(klass, getFn)();
 
     deps.$scope.$watch angular.bind(klass, getFn), (newVal, oldVal) ->
       if oldVal isnt newVal
-        deps.$scope[prop] = newVal
+        setter deps.$scope, newVal
 
   registerGetWithWatch: (prop, obj, klass, deps) ->
     watch = "[#{obj.watch.toString()}]"
-    deps.$scope[prop] = angular.bind(klass, obj.get)()
+    
+    getter = @$parse prop
+    setter = getter.assign
+    setter deps.$scope, angular.bind(klass, obj.get)()
     deps.$scope.$watchCollection watch, (newVal, oldVal) ->
-      deps.$scope[prop] = angular.bind(klass, obj.get)()
+      setter deps.$scope, angular.bind(klass, obj.get)()
 
   registerSet: (prop, setFn, klass, deps) ->
     deps.$scope.$watch prop, angular.bind(klass, setFn)
