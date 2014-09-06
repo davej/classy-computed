@@ -22,20 +22,23 @@ angular.module('classy-computed', ['classy-core']).classy.plugin.controller
         @registerAdvanced(prop, computeUsing, klass, deps)
 
   registerGet: (prop, getFn, klass, deps) ->
-    deps.$scope[prop] = angular.bind(klass, getFn)();
+    boundFn = angular.bind(klass, getFn)
+    deps.$scope[prop] = boundFn()
 
-    deps.$scope.$watch angular.bind(klass, getFn), (newVal, oldVal) ->
-      if oldVal isnt newVal
+    deps.$scope.$watch boundFn, (newVal) ->
+      if deps.$scope[prop] isnt newVal
         deps.$scope[prop] = newVal
 
   registerGetWithWatch: (prop, obj, klass, deps) ->
     watch = "[#{obj.watch.toString()}]"
-    deps.$scope[prop] = angular.bind(klass, obj.get)()
-    deps.$scope.$watchCollection watch, (newVal, oldVal) ->
+    do assign = ->
       deps.$scope[prop] = angular.bind(klass, obj.get)()
+    deps.$scope.$watchCollection watch, assign
 
   registerSet: (prop, setFn, klass, deps) ->
-    deps.$scope.$watch prop, angular.bind(klass, setFn)
+    boundFn = angular.bind(klass, setFn)
+    boundFn(deps.$scope[prop])
+    deps.$scope.$watch prop, boundFn
 
   registerAdvanced: (prop, obj, klass, deps) ->
     if typeof obj.get is 'function'
