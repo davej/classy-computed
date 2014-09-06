@@ -1,4 +1,4 @@
-# Computed Properties plugin for Angular Classy
+# Computed Properties plugin for Angular Classy [![Build Status](https://travis-ci.org/davej/classy-computed.svg)](https://travis-ci.org/davej/classy-computed)
 
 This is plugin that makes it possible to do computed set & get properties with Angular Classy (as seen before in frameworks like ember). Tests coming soon.
 
