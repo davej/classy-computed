@@ -44,12 +44,22 @@
       });
     },
     registerGetWithWatch: function(prop, obj, klass, deps) {
-      var assign, watch;
+      var watch;
       watch = "[" + (obj.watch.toString()) + "]";
-      (assign = function() {
-        return deps.$scope[prop] = angular.bind(klass, obj.get)();
-      })();
-      return deps.$scope.$watchCollection(watch, assign);
+      deps.$scope[prop] = angular.bind(klass, obj.get)();
+      return deps.$scope.$watchCollection(watch, function(newVals, oldVals) {
+        var changed, i, val, _i, _len;
+        changed = false;
+        for (i = _i = 0, _len = oldVals.length; _i < _len; i = ++_i) {
+          val = oldVals[i];
+          if (val !== newVals[i]) {
+            changed = true;
+          }
+        }
+        if (changed) {
+          return deps.$scope[prop] = angular.bind(klass, obj.get)();
+        }
+      });
     },
     registerSet: function(prop, setFn, klass, deps) {
       var boundFn;

@@ -31,9 +31,14 @@ angular.module('classy-computed', ['classy-core']).classy.plugin.controller
 
   registerGetWithWatch: (prop, obj, klass, deps) ->
     watch = "[#{obj.watch.toString()}]"
-    do assign = ->
-      deps.$scope[prop] = angular.bind(klass, obj.get)()
-    deps.$scope.$watchCollection watch, assign
+    deps.$scope[prop] = angular.bind(klass, obj.get)()
+
+    deps.$scope.$watchCollection watch, (newVals, oldVals) ->
+      changed = false
+      for val, i in oldVals
+        if val isnt newVals[i] then changed = true
+      if changed
+        deps.$scope[prop] = angular.bind(klass, obj.get)()
 
   registerSet: (prop, setFn, klass, deps) ->
     boundFn = angular.bind(klass, setFn)

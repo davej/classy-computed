@@ -59,10 +59,12 @@
 
 		describe('when firstName or secondName changes', function () {
 			it('fullName computed property should be updated', function () {
+				scope.$digest();
 				scope.firstName = 'Geoff';
 				scope.$digest();
 				expect(scope.fullName).toBe("Geoff Butler");
 
+				scope.$digest();
 				scope.secondName = 'Butts';
 				scope.$digest();
 				expect(scope.fullName).toBe("Geoff Butts");
@@ -101,49 +103,50 @@
 		});
 	});
 
-	describe('Classy Computed Get and Set Property Controller', function () {
-		var ctrl, scope;
-		var ctrlName = 'ComputedGetSetController';
+describe('Classy Computed Get and Set Property Controller (with watch)', function () {
+	var ctrl, scope;
+	var ctrlName = 'ComputedGetSetWithWatchController';
 
-		// Load the module containing the app, only 'ng' is loaded by default.
-		beforeEach(module('app'));
+	// Load the module containing the app, only 'ng' is loaded by default.
+	beforeEach(module('app'));
 
-		beforeEach(inject(function ($controller, $rootScope) {
-			scope = $rootScope.$new();
-			ctrl = $controller(ctrlName, { $scope: scope });
-		}));
+	beforeEach(inject(function ($controller, $rootScope) {
+		scope = $rootScope.$new();
+		ctrl = $controller(ctrlName, { $scope: scope });
+	}));
 
-		it('should have the fullName property computed on start', function () {
-			expect(scope.fullName).toBe("Tyriq Johnson");
-		});
+	it('should have the fullName property computed on start', function () {
+		expect(scope.fullName).toBe("Jazzy Jeff");
+	});
 
-		it('should have first and second name assigned on start', function () {
-			expect(scope.firstName).toBe("Tyriq");
-			expect(scope.secondName).toBe("Johnson");
-		});
+	it('should have first and second name assigned on start', function () {
+		expect(scope.firstName).toBe("Jazzy");
+		expect(scope.secondName).toBe("Jeff");
+	});
 
-		describe('when fullName changes', function () {
-			it('should update firstName and Second Name', function () {
-				scope.fullName = 'Tobey Maquire';
-				scope.$digest();
-				expect(scope.fullName).toBe("Tobey Maquire");
-				expect(scope.firstName).toBe("Tobey");
-				expect(scope.secondName).toBe("Maquire");
-			});
-		});
-
-		describe('when firstName or secondName changes', function () {
-			it('fullName computed property should be updated', function () {
-				scope.firstName = 'Spider';
-				scope.$digest();
-				expect(scope.fullName).toBe("Spider Johnson");
-
-				scope.secondName = 'Man';
-				scope.$digest();
-				expect(scope.fullName).toBe("Spider Man");
-			});
+	describe('when fullName changes', function () {
+		it('should update firstName and Second Name', function () {
+			scope.fullName = 'Willy Wonka';
+			scope.$digest();
+			expect(scope.fullName).toBe("Willy Wonka");
+			expect(scope.firstName).toBe("Willy");
+			expect(scope.secondName).toBe("Wonka");
 		});
 	});
+
+	describe('when firstName or secondName changes', function () {
+		it('fullName computed property should be updated', function () {
+			scope.$digest();
+			scope.firstName = 'Daffy';
+			scope.$digest();
+			expect(scope.fullName).toBe("Daffy Jeff");
+
+			scope.secondName = 'Duck';
+			scope.$digest();
+			expect(scope.fullName).toBe("Daffy Duck");
+		});
+	});
+});
 
 
 
