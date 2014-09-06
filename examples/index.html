@@ -52,7 +52,7 @@
 
   <section ng-controller="ComputedSetController">
     <h1>Computed set property</h1>
-    <p>You can also do computed setters</p>
+    <p>You can also do computed setters.</p>
     <label>First name: {{firstName}}</label><br>
     <label>Last name: {{secondName}}</label><br>
     <label>Full name:
@@ -61,8 +61,8 @@
   </section>
 
   <section ng-controller="ComputedGetSetWithWatchController">
-    <h1>Computed get &amp; set properties (with explicit watch for performance)</h1>
-    <p>And of course, we can add a watch array for better <code>get</code> performance</p>
+    <h1>Computed get &amp; set properties</h1>
+    <p>You can also combine getters and setters, make sure you add a watch array or you might get some unexpected behaviour.</p>
     <label>First name: <input ng-model="firstName"></label><br>
     <label>Last name: <input ng-model="secondName"></label><br>
     <label>Full name:

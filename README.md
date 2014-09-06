@@ -24,6 +24,18 @@ Add `classy` and `classy-computed` to your application module.
 var app = angular.module('app', ['classy', 'classy-computed']);
 ```
 
+## Running Tests
+
+Download this repo, `cd` into the repo's directory then run:
+
+```shell
+npm install
+npm install -g bower # If bower isn't already installed
+bower install
+npm test
+```
+
+
 ## Usage Examples
 
 View [working examples here](http://davej.github.io/classy-computed/examples/).
