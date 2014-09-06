@@ -86,8 +86,8 @@ app.classy.controller({
 	// ...
 
 	computed: {
-		watch: ['firstName', 'secondName'],
 		fullName: {
+			watch: ['firstName', 'secondName'],
 			get: function() {
 					return this.$.firstName + ' ' + this.$.secondName;
 			},
