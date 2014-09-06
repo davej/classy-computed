@@ -66,6 +66,7 @@ app.classy.controller({
 ### Computed setters
 
 You can also do computed setters and even combine with computed getters.
+If you wish to combine computed getters and setters then it is highly recommended that you add a watch property, otherwise you may get unexpected behaviour.
 
 ```javascript
 app.classy.controller({
@@ -73,6 +74,7 @@ app.classy.controller({
 	// ...
 
 	computed: {
+		watch: ['firstName', 'secondName'],
 		fullName: {
 			get: function() {
 					return this.$.firstName + ' ' + this.$.secondName;

@@ -1,0 +1,16 @@
+{
+  "name": "classy-computed",
+  "scripts": {
+    "start": "./node_modules/coffee-script/bin/coffee --compile classy-computed.coffee",
+    "test": "./node_modules/karma/bin/karma start test/karma.conf.js"
+  },
+  "author": "Dave Jeffery",
+  "license": "MIT",
+  "devDependencies": {
+    "coffee-script": "^1.7.1",
+    "karma": "^0.12.17",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-firefox-launcher": "^0.1.3"
+  }
+}

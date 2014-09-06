@@ -66,33 +66,6 @@ app.classy.controller({
 });
 
 app.classy.controller({
-  name: 'ComputedGetSetController',
-  inject: ['$scope'],
-
-  init: function() {
-    this.$.firstName = 'Tyriq';
-    this.$.secondName = 'Johnson';
-  },
-
-  computed: {
-    fullName: {
-      get: function() {
-          return this.$.firstName + ' ' + this.$.secondName;
-      },
-      set: function(fullName) {
-        if (fullName && fullName.split(' ')) {
-          var names = fullName.split(' ');
-          this.$.firstName = names[0] || '';
-          if (names.length > 1) {
-            this.$.secondName = names[names.length - 1] || '';
-          }
-        }
-      }
-    }
-  }
-});
-
-app.classy.controller({
   name: 'ComputedGetSetWithWatchController',
   inject: ['$scope'],
 

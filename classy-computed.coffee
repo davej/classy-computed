@@ -1,6 +1,8 @@
 angular.module('classy-computed', ['classy-core']).classy.plugin.controller
   name: 'computed'
 
+  localInject: ['$parse']
+  
   options:
     enabled: true
 
@@ -22,20 +24,33 @@ angular.module('classy-computed', ['classy-core']).classy.plugin.controller
         @registerAdvanced(prop, computeUsing, klass, deps)
 
   registerGet: (prop, getFn, klass, deps) ->
-    deps.$scope[prop] = angular.bind(klass, getFn)();
+    getter = @$parse prop
+    setter = getter.assign
+    boundFn = angular.bind(klass, getFn)
+    setter deps.$scope, boundFn()
 
-    deps.$scope.$watch angular.bind(klass, getFn), (newVal, oldVal) ->
+    deps.$scope.$watch boundFn, (newVal, oldVal) ->
       if oldVal isnt newVal
-        deps.$scope[prop] = newVal
+        setter deps.$scope, newVal
 
   registerGetWithWatch: (prop, obj, klass, deps) ->
     watch = "[#{obj.watch.toString()}]"
-    deps.$scope[prop] = angular.bind(klass, obj.get)()
-    deps.$scope.$watchCollection watch, (newVal, oldVal) ->
-      deps.$scope[prop] = angular.bind(klass, obj.get)()
+
+    getter = @$parse prop
+    setter = getter.assign
+    setter deps.$scope, angular.bind(klass, obj.get)()
+
+    deps.$scope.$watchCollection watch, (newVals, oldVals) ->
+      changed = false
+      for val, i in oldVals
+        if val isnt newVals[i] then changed = true
+      if changed
+        setter deps.$scope, angular.bind(klass, obj.get)()
 
   registerSet: (prop, setFn, klass, deps) ->
-    deps.$scope.$watch prop, angular.bind(klass, setFn)
+    boundFn = angular.bind(klass, setFn)
+    boundFn(deps.$scope[prop])
+    deps.$scope.$watch prop, boundFn
 
   registerAdvanced: (prop, obj, klass, deps) ->
     if typeof obj.get is 'function'
