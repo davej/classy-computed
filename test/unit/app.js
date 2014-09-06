@@ -25,6 +25,7 @@
 
 		describe('when firstName or secondName changes', function () {
 			it('fullName computed property should be updated', function () {
+				scope.$digest();
 				scope.firstName = 'Carlton';
 				scope.$digest();
 				expect(scope.fullName).toBe("Carlton Banks");
@@ -95,6 +96,7 @@
 
 		describe('when fullName changes', function () {
 			it('should update firstName and Second Name', function () {
+				scope.$digest();
 				scope.fullName = 'Big Willy';
 				scope.$digest();
 				expect(scope.firstName).toBe("Big");
@@ -126,6 +128,7 @@ describe('Classy Computed Get and Set Property Controller (with watch)', functio
 
 	describe('when fullName changes', function () {
 		it('should update firstName and Second Name', function () {
+			scope.$digest();
 			scope.fullName = 'Willy Wonka';
 			scope.$digest();
 			expect(scope.fullName).toBe("Willy Wonka");

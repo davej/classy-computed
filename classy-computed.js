@@ -2,6 +2,7 @@
 (function() {
   angular.module('classy-computed', ['classy-core']).classy.plugin.controller({
     name: 'computed',
+    localInject: ['$parse'],
     options: {
       enabled: true
     },
@@ -34,19 +35,23 @@
       return _results;
     },
     registerGet: function(prop, getFn, klass, deps) {
-      var boundFn;
+      var boundFn, getter, setter;
+      getter = this.$parse(prop);
+      setter = getter.assign;
       boundFn = angular.bind(klass, getFn);
-      deps.$scope[prop] = boundFn();
-      return deps.$scope.$watch(boundFn, function(newVal) {
-        if (deps.$scope[prop] !== newVal) {
-          return deps.$scope[prop] = newVal;
+      setter(deps.$scope, boundFn());
+      return deps.$scope.$watch(boundFn, function(newVal, oldVal) {
+        if (oldVal !== newVal) {
+          return setter(deps.$scope, newVal);
         }
       });
     },
     registerGetWithWatch: function(prop, obj, klass, deps) {
-      var watch;
+      var getter, setter, watch;
       watch = "[" + (obj.watch.toString()) + "]";
-      deps.$scope[prop] = angular.bind(klass, obj.get)();
+      getter = this.$parse(prop);
+      setter = getter.assign;
+      setter(deps.$scope, angular.bind(klass, obj.get)());
       return deps.$scope.$watchCollection(watch, function(newVals, oldVals) {
         var changed, i, val, _i, _len;
         changed = false;
@@ -57,7 +62,7 @@
           }
         }
         if (changed) {
-          return deps.$scope[prop] = angular.bind(klass, obj.get)();
+          return setter(deps.$scope, angular.bind(klass, obj.get)());
         }
       });
     },
