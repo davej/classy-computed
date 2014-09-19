@@ -49,7 +49,8 @@ angular.module('classy-computed', ['classy-core']).classy.plugin.controller
 
   registerSet: (prop, setFn, klass, deps) ->
     boundFn = angular.bind(klass, setFn)
-    boundFn(deps.$scope[prop])
+    getter = @$parse prop
+    boundFn(getter(deps.$scope))
     deps.$scope.$watch prop, boundFn
 
   registerAdvanced: (prop, obj, klass, deps) ->

@@ -67,9 +67,10 @@
       });
     },
     registerSet: function(prop, setFn, klass, deps) {
-      var boundFn;
+      var boundFn, getter;
       boundFn = angular.bind(klass, setFn);
-      boundFn(deps.$scope[prop]);
+      getter = this.$parse(prop);
+      boundFn(getter(deps.$scope));
       return deps.$scope.$watch(prop, boundFn);
     },
     registerAdvanced: function(prop, obj, klass, deps) {
