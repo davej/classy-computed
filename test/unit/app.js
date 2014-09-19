@@ -151,6 +151,94 @@ describe('Classy Computed Get and Set Property Controller (with watch)', functio
 	});
 });
 
+describe('Combined Computed Controller (thanks @wuxiaoying)', function () {
+	// Tests object properties and combines multiple computed properties in one controller
+
+	var ctrl, scope;
+	var ctrlName = 'CombinedComputedController';
+
+	// Load the module containing the app, only 'ng' is loaded by default.
+	beforeEach(module('app'));
+
+	beforeEach(inject(function ($controller, $rootScope) {
+		scope = $rootScope.$new();
+		ctrl = $controller(ctrlName, { $scope: scope });
+	}));
+
+	describe('computed property', function () {
+		it('should have the fullName property computed on start', function () {
+			expect(scope.fullName).toBe("Karlton Banks");
+		});
+
+		it('should update full name computed property when first or last name changes', function () {
+			scope.$digest();
+			scope.testData.firstName = 'Carlton';
+			scope.$digest();
+			expect(scope.fullName).toBe("Carlton Banks");
+
+			scope.testData.lastName = 'Bank';
+			scope.$digest();
+			expect(scope.fullName).toBe("Carlton Bank");
+		});
+	});
+
+	describe('computed property with watch', function () {
+		it('should have the fullName property computed on start', function () {
+			expect(scope.fullName).toBe("Karlton Banks");
+		});
+
+		it('should update full name computed property when first or last name changes', function () {
+			scope.$digest();
+			scope.testData.firstName = 'Carlton';
+			scope.$digest();
+			expect(scope.fullNameWithWatch).toBe("Carlton Banks");
+
+			scope.testData.lastName = 'Bank';
+			scope.$digest();
+			expect(scope.fullNameWithWatch).toBe("Carlton Bank");
+		});
+	});
+
+	describe('computed set property', function () {
+		it('should have first and second name assigned on start', function () {
+			expect(scope.firstName).toBe("Will");
+			expect(scope.lastName).toBe("Smith");
+		});
+
+		it('should update firstName and Second Name', function () {
+			scope.$digest();
+			scope.testData.fullName = 'Big Willy';
+			scope.$digest();
+			expect(scope.firstName).toBe("Big");
+			expect(scope.lastName).toBe("Willy");
+		});
+	});
+
+	describe('computed get and set property (with watch)', function () {
+		it('should have full name property computed at start', function() {
+		  expect(scope.fullNameGetSetWithWatch).toBe('Jazzy Jeff');
+		});
+		it('should update first and last name when full name changes', function() {
+		  scope.fullNameGetSetWithWatch = 'Willy Wonka';
+		  scope.$digest();
+		  expect(scope.testData.firstNameGetSet).toBe('Willy');
+		  expect(scope.testData.lastNameGetSet).toBe('Wonka');
+		});
+		it('should update computed property when first or last name changes', function() {
+		  scope.$digest();
+		  scope.testData.firstNameGetSet = 'Daffy';
+		  scope.$digest();
+		  expect(scope.fullNameGetSetWithWatch).toBe('Daffy Jeff');
+		  scope.testData.lastNameGetSet = 'Duck';
+		  scope.$digest();
+		  expect(scope.fullNameGetSetWithWatch).toBe('Daffy Duck');
+		});
+	});
+
+
+
+});
+
 
 
 }());

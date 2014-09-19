@@ -92,3 +92,44 @@ app.classy.controller({
     }
   }
 });
+
+app.classy.controller({
+  name: 'CombinedComputedController',
+  inject: ['$scope'],
+  init: function() {
+    this.$.testData = {
+      firstName: 'Karlton',
+      lastName: 'Banks',
+      firstNameGetSet: 'Jazzy',
+      lastNameGetSet: 'Jeff',
+      fullName: 'Will Smith'
+    }
+  },
+  computed: {
+    fullName: function() {
+      return "" + this.$.testData.firstName + " " + this.$.testData.lastName;
+    },
+    fullNameWithWatch: {
+      watch: ['testData.firstName', 'testData.lastName'],
+      get: function() {
+        return "" + this.$.testData.firstName + " " + this.$.testData.lastName;
+      }
+    },
+    'testData.fullName': {
+      set: function(fullName) {
+        var _ref;
+        _ref = typeof fullName !== "undefined" && fullName !== null ? fullName.split(' ') : void 0, this.$.firstName = _ref[0], this.$.lastName = _ref[1];
+      }
+    },
+    fullNameGetSetWithWatch: {
+      watch: ['testData.firstNameGetSet', 'testData.lastNameGetSet'],
+      get: function() {
+        return "" + this.$.testData.firstNameGetSet + " " + this.$.testData.lastNameGetSet;
+      },
+      set: function(fullName) {
+        var _ref;
+        _ref = typeof fullName !== "undefined" && fullName !== null ? fullName.split(' ') : void 0, this.$.testData.firstNameGetSet = _ref[0], this.$.testData.lastNameGetSet = _ref[1];
+      }
+    }
+  }
+});
