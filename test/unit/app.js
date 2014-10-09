@@ -12,6 +12,7 @@
 		beforeEach(inject(function ($controller, $rootScope) {
 			scope = $rootScope.$new();
 			ctrl = $controller(ctrlName, { $scope: scope });
+			scope.$digest();
 		}));
 
 		it('should have first and second name assigned on start', function () {
@@ -25,7 +26,6 @@
 
 		describe('when firstName or secondName changes', function () {
 			it('fullName computed property should be updated', function () {
-				scope.$digest();
 				scope.firstName = 'Carlton';
 				scope.$digest();
 				expect(scope.fullName).toBe("Carlton Banks");
@@ -47,6 +47,7 @@
 		beforeEach(inject(function ($controller, $rootScope) {
 			scope = $rootScope.$new();
 			ctrl = $controller(ctrlName, { $scope: scope });
+			scope.$digest();
 		}));
 
 		it('should have first and second name assigned on start', function () {
@@ -60,12 +61,10 @@
 
 		describe('when firstName or secondName changes', function () {
 			it('fullName computed property should be updated', function () {
-				scope.$digest();
 				scope.firstName = 'Geoff';
 				scope.$digest();
 				expect(scope.fullName).toBe("Geoff Butler");
 
-				scope.$digest();
 				scope.secondName = 'Butts';
 				scope.$digest();
 				expect(scope.fullName).toBe("Geoff Butts");
@@ -83,6 +82,7 @@
 		beforeEach(inject(function ($controller, $rootScope) {
 			scope = $rootScope.$new();
 			ctrl = $controller(ctrlName, { $scope: scope });
+			scope.$digest();
 		}));
 
 		it('should have the fullName property computed on start', function () {
@@ -96,7 +96,6 @@
 
 		describe('when fullName changes', function () {
 			it('should update firstName and Second Name', function () {
-				scope.$digest();
 				scope.fullName = 'Big Willy';
 				scope.$digest();
 				expect(scope.firstName).toBe("Big");
@@ -115,6 +114,7 @@ describe('Classy Computed Get and Set Property Controller (with watch)', functio
 	beforeEach(inject(function ($controller, $rootScope) {
 		scope = $rootScope.$new();
 		ctrl = $controller(ctrlName, { $scope: scope });
+		scope.$digest();
 	}));
 
 	it('should have the fullName property computed on start', function () {
@@ -128,7 +128,7 @@ describe('Classy Computed Get and Set Property Controller (with watch)', functio
 
 	describe('when fullName changes', function () {
 		it('should update firstName and Second Name', function () {
-			scope.$digest();
+
 			scope.fullName = 'Willy Wonka';
 			scope.$digest();
 			expect(scope.fullName).toBe("Willy Wonka");
@@ -139,7 +139,6 @@ describe('Classy Computed Get and Set Property Controller (with watch)', functio
 
 	describe('when firstName or secondName changes', function () {
 		it('fullName computed property should be updated', function () {
-			scope.$digest();
 			scope.firstName = 'Daffy';
 			scope.$digest();
 			expect(scope.fullName).toBe("Daffy Jeff");
@@ -163,6 +162,7 @@ describe('Combined Computed Controller (thanks @wuxiaoying)', function () {
 	beforeEach(inject(function ($controller, $rootScope) {
 		scope = $rootScope.$new();
 		ctrl = $controller(ctrlName, { $scope: scope });
+		scope.$digest();
 	}));
 
 	describe('computed property', function () {
@@ -171,7 +171,6 @@ describe('Combined Computed Controller (thanks @wuxiaoying)', function () {
 		});
 
 		it('should update full name computed property when first or last name changes', function () {
-			scope.$digest();
 			scope.testData.firstName = 'Carlton';
 			scope.$digest();
 			expect(scope.fullName).toBe("Carlton Banks");
@@ -188,7 +187,6 @@ describe('Combined Computed Controller (thanks @wuxiaoying)', function () {
 		});
 
 		it('should update full name computed property when first or last name changes', function () {
-			scope.$digest();
 			scope.testData.firstName = 'Carlton';
 			scope.$digest();
 			expect(scope.fullNameWithWatch).toBe("Carlton Banks");
@@ -206,7 +204,6 @@ describe('Combined Computed Controller (thanks @wuxiaoying)', function () {
 		});
 
 		it('should update firstName and Second Name', function () {
-			scope.$digest();
 			scope.testData.fullName = 'Big Willy';
 			scope.$digest();
 			expect(scope.firstName).toBe("Big");
@@ -225,7 +222,6 @@ describe('Combined Computed Controller (thanks @wuxiaoying)', function () {
 		  expect(scope.testData.lastNameGetSet).toBe('Wonka');
 		});
 		it('should update computed property when first or last name changes', function() {
-		  scope.$digest();
 		  scope.testData.firstNameGetSet = 'Daffy';
 		  scope.$digest();
 		  expect(scope.fullNameGetSetWithWatch).toBe('Daffy Jeff');

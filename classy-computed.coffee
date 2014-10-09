@@ -18,39 +18,32 @@ angular.module('classy-computed', ['classy-core']).classy.plugin.controller
     if !@isActive(klass, deps) then return
 
     for prop, computeUsing of klass.computed
-      if typeof computeUsing is 'function'
+      if angular.isFunction computeUsing
         @registerGet(prop, computeUsing, klass, deps)
-      else if typeof computeUsing is 'object'
+      else if angular.isObject computeUsing
         @registerAdvanced(prop, computeUsing, klass, deps)
 
   registerGet: (prop, getFn, klass, deps) ->
     getter = @$parse prop
     setter = getter.assign
     boundFn = angular.bind(klass, getFn)
-    setter deps.$scope, boundFn()
 
-    deps.$scope.$watch boundFn, (newVal, oldVal) ->
-      if oldVal isnt newVal
-        setter deps.$scope, newVal
+    deps.$scope.$watch boundFn, (newVal) ->
+      setter deps.$scope, newVal
 
   registerGetWithWatch: (prop, obj, klass, deps) ->
     watch = "[#{obj.watch.toString()}]"
 
     getter = @$parse prop
     setter = getter.assign
-    setter deps.$scope, angular.bind(klass, obj.get)()
+    boundFn = angular.bind(klass, obj.get)
 
-    deps.$scope.$watchCollection watch, (newVals, oldVals) ->
-      changed = false
-      for val, i in oldVals
-        if val isnt newVals[i] then changed = true
-      if changed
-        setter deps.$scope, angular.bind(klass, obj.get)()
+    deps.$scope.$watchCollection watch, ->
+      setter deps.$scope, boundFn()
 
   registerSet: (prop, setFn, klass, deps) ->
     boundFn = angular.bind(klass, setFn)
     getter = @$parse prop
-    boundFn(getter(deps.$scope))
     deps.$scope.$watch prop, boundFn
 
   registerAdvanced: (prop, obj, klass, deps) ->

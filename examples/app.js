@@ -78,7 +78,7 @@ app.classy.controller({
     fullName: {
       watch: ['firstName', 'secondName'],
       get: function() {
-          return this.$.firstName + ' ' + this.$.secondName;
+        return this.$.firstName + ' ' + this.$.secondName;
       },
       set: function(fullName) {
         if (fullName && fullName.split(' ')) {
