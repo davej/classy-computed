@@ -1,4 +1,4 @@
-# Computed Properties plugin for Angular Classy
+# Computed Properties plugin for Angular Classy [![Build Status](https://travis-ci.org/davej/classy-computed.svg)](https://travis-ci.org/davej/classy-computed)
 
 This is plugin that makes it possible to do computed set & get properties with Angular Classy (as seen before in frameworks like ember). Tests coming soon.
 
@@ -23,6 +23,18 @@ Add `classy` and `classy-computed` to your application module.
 ```javascript
 var app = angular.module('app', ['classy', 'classy-computed']);
 ```
+
+## Running Tests
+
+Download this repo, `cd` into the repo's directory then run:
+
+```shell
+npm install
+npm install -g bower # If bower isn't already installed
+bower install
+npm test
+```
+
 
 ## Usage Examples
 
@@ -74,8 +86,8 @@ app.classy.controller({
 	// ...
 
 	computed: {
-		watch: ['firstName', 'secondName'],
 		fullName: {
+			watch: ['firstName', 'secondName'],
 			get: function() {
 					return this.$.firstName + ' ' + this.$.secondName;
 			},
