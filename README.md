@@ -1,6 +1,6 @@
 # Computed Properties plugin for Angular Classy [![Build Status](https://travis-ci.org/davej/classy-computed.svg)](https://travis-ci.org/davej/classy-computed)
 
-This is plugin that makes it possible to do computed set & get properties with Angular Classy (as seen before in frameworks like ember). Tests coming soon.
+This is plugin that makes it possible to do computed set & get properties with Angular Classy (as seen before in frameworks like ember).
 
 ## Install
 
@@ -44,7 +44,7 @@ View [working examples here](http://davej.github.io/classy-computed/examples/).
 
 ```javascript
 app.classy.controller({
-	
+
 	// ...
 
 	computed: {
@@ -61,7 +61,7 @@ Adding a watch field will give you better performance because it will only execu
 
 ```javascript
 app.classy.controller({
-	
+
 	// ...
 
 	computed: {
@@ -82,7 +82,7 @@ If you wish to combine computed getters and setters then it is highly recommende
 
 ```javascript
 app.classy.controller({
-	
+
 	// ...
 
 	computed: {
