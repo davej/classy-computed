@@ -13,7 +13,7 @@ app.classy.controller({
     this.$.secondName = 'Banks';
 
     // Easter Egg :-)
-    this.$.dancingCarltonCSSProp = 'url(http://media.giphy.com/media/uK1m1ZAJAOr8k/giphy.gif) no-repeat top right'
+    this.$.dancingCarltonCSSProp = 'url(carlton.gif) no-repeat top right'
   },
 
   computed: {
