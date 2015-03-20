@@ -5,7 +5,7 @@ module.exports = function(config) {
     files: [
 	    'bower_components/angular/angular.js',
 		  'bower_components/angular-classy/angular-classy.js',
-      'classy-computed.js',
+      'computed.js',
       'bower_components/angular-mocks/angular-mocks.js',
 		  'examples/app.js',
 		  'test/unit/*.js'

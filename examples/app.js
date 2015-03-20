@@ -2,7 +2,7 @@
 /*jshint unused:false */
 'use strict';
 
-var app = angular.module('app', ['classy', 'classy-computed']);
+var app = angular.module('app', ['classy', 'classy.computed']);
 
 app.classy.controller({
   name: 'ComputedController',

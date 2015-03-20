@@ -1,7 +1,7 @@
 {
   "name": "classy-computed",
   "scripts": {
-    "start": "./node_modules/coffee-script/bin/coffee --compile classy-computed.coffee",
+    "start": "./node_modules/coffee-script/bin/coffee --compile computed.coffee",
     "test": "./node_modules/karma/bin/karma start test/karma.conf.js"
   },
   "author": "Dave Jeffery",

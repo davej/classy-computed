@@ -1,6 +1,4 @@
-angular.module('classy-computed', ['classy-core']).classy.plugin.controller
-  name: 'computed'
-
+angular.module('classy.computed', ['classy.core']).classy.plugin.controller
   localInject: ['$parse']
   
   options:
