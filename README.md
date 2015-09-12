@@ -18,10 +18,10 @@ Add to your `index.html`:
 <script src="/bower_components/classy-computed/classy-computed.js"></script>
 ```
 
-Add `classy` and `classy-computed` to your application module.
+Add `classy` and `classy.computed` to your application module.
 
 ```javascript
-var app = angular.module('app', ['classy', 'classy-computed']);
+var app = angular.module('app', ['classy', 'classy.computed']);
 ```
 
 ## Running Tests
