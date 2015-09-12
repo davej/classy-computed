@@ -5,7 +5,7 @@
     "Dave Jeffery <dave@davejeffery.com>"
   ],
   "description": "Computed Properties plugin for Angular Classy",
-  "main": "classy-computed.js",
+  "main": "computed.js",
   "keywords": [
     "classy-plugin",
     "angularjs",
