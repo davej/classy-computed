@@ -15,7 +15,7 @@ Add to your `index.html`:
 ```html
 <script src="/bower_components/angular/angular.js"></script>
 <script src="/bower_components/angular-classy/angular-classy.js"></script>
-<script src="/bower_components/classy-computed/classy-computed.js"></script>
+<script src="/bower_components/classy-computed/computed.js"></script>
 ```
 
 Add `classy` and `classy.computed` to your application module.
